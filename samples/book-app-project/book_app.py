@@ -21,12 +21,12 @@ def show_books(books):
     print()
 
 
-def handle_list():
+def handle_list() -> None:
     books = collection.list_books()
     show_books(books)
 
 
-def handle_add():
+def handle_add() -> None:
     print("\nAdd a New Book\n")
 
     title = input("Title: ").strip()
@@ -41,7 +41,7 @@ def handle_add():
         print(f"\nError: {e}\n")
 
 
-def handle_remove():
+def handle_remove() -> None:
     print("\nRemove a Book\n")
 
     title = input("Enter the title of the book to remove: ").strip()
@@ -50,7 +50,7 @@ def handle_remove():
     print("\nBook removed if it existed.\n")
 
 
-def handle_find():
+def handle_find() -> None:
     print("\nFind Books by Author\n")
 
     author = input("Author name: ").strip()
@@ -59,16 +59,30 @@ def handle_find():
     show_books(books)
 
 
+def handle_mark_read() -> None:
+    print("\nMark a Book as Read\n")
+    title = input("Enter the title of the book to mark as read: ").strip()
+    if not title:
+        print("No title entered. Aborting.\n")
+        return
+    result = collection.mark_as_read(title)
+    if result:
+        print(f"\nMarked '{title}' as read.\n")
+    else:
+        print(f"\nBook titled '{title}' not found.\n")
+
+
 def show_help():
-    print("""
+        print("""
 Book Collection Helper
 
 Commands:
-  list     - Show all books
-  add      - Add a new book
-  remove   - Remove a book by title
-  find     - Find books by author
-  help     - Show this help message
+    list       - Show all books
+    add        - Add a new book
+    remove     - Remove a book by title
+    find       - Find books by author
+    mark-read  - Mark a book as read
+    help       - Show this help message
 """)
 
 
@@ -79,19 +93,22 @@ def main():
 
     command = sys.argv[1].lower()
 
-    if command == "list":
-        handle_list()
-    elif command == "add":
-        handle_add()
-    elif command == "remove":
-        handle_remove()
-    elif command == "find":
-        handle_find()
-    elif command == "help":
-        show_help()
-    else:
+    command_handlers = {
+        "list": handle_list,
+        "add": handle_add,
+        "remove": handle_remove,
+        "find": handle_find,
+        "mark-read": handle_mark_read,
+        "help": show_help,
+    }
+
+    handler = command_handlers.get(command)
+    if handler is None:
         print("Unknown command.\n")
         show_help()
+        return
+
+    handler()
 
 
 if __name__ == "__main__":
