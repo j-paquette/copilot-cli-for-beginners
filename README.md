@@ -93,7 +93,7 @@ The **[GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/
 
 - 🐛 **Found a bug?** [Open an Issue](https://github.com/github/copilot-cli-for-beginners/issues)
 - 📚 **Official Docs:** [GitHub Copilot CLI Documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
-
+git
 ## Contributing
 
 > **Note**: The code used in the course is designed to generate specific types of output during reviews, explanations, and debugging so we aren't able to accept PRs that change the existing code.
@@ -110,5 +110,5 @@ The **[GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
 
 test message
-test message #2
+
 
